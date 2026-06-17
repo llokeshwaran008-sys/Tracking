@@ -9,7 +9,7 @@ export function Layout() {
     if (typeof window !== 'undefined') {
       return document.documentElement.classList.contains('dark');
     }
-    return true; // Default dark
+    return true;
   });
 
   useEffect(() => {
@@ -23,24 +23,17 @@ export function Layout() {
 
   const toggleTheme = () => setIsDark(!isDark);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const closeSidebar = () => setSidebarOpen(false);
 
   return (
     <div className="flex h-screen bg-background overflow-hidden text-foreground">
-      <Sidebar />
-      
-      {/* Mobile sidebar overlay (simplified for now, ideally use framer-motion) */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
-        <Header 
-          toggleSidebar={toggleSidebar} 
-          toggleTheme={toggleTheme} 
-          isDark={isDark} 
+        <Header
+          toggleSidebar={toggleSidebar}
+          toggleTheme={toggleTheme}
+          isDark={isDark}
         />
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-background p-4 lg:p-8">
           <Outlet />
