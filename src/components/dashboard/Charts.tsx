@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
   PieChart, Pie, Cell, 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+  LineChart, Line
 } from 'recharts';
 import type { Booking } from '../../types';
 
@@ -32,43 +33,54 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-// ... Status Pie Chart ...
-export function StatusPieChart({ bookings }: { bookings: Booking[] }) {
-  const data = [
-    { name: 'Done', value: bookings.filter(b => b.status === 'Done').length },
-    { name: 'Processing', value: bookings.filter(b => b.status === 'Processing').length },
-    { name: 'Upcoming', value: bookings.filter(b => b.status === 'Upcoming').length },
-    { name: 'Cancelled', value: bookings.filter(b => b.status === 'Cancelled').length },
-  ].filter(d => d.value > 0);
+// ... Trend Line Chart ...
+export function TrendLineChart({ bookings }: { bookings: Booking[] }) {
+  const data = bookings.reduce((acc: any[], booking) => {
+    if (!booking.functionDate) return acc;
+    
+    const date = new Date(booking.functionDate);
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+    const key = `${month} ${year}`;
+    
+    const existing = acc.find(item => item.name === key);
+    if (existing) {
+      existing.bookings += 1;
+    } else {
+      acc.push({
+        name: key,
+        bookings: 1,
+        dateObj: date // for sorting
+      });
+    }
+    return acc;
+  }, []);
 
-  const statusColors: Record<string, string> = {
-    'Done': 'hsl(145 60% 50%)',       // Green
-    'Processing': 'hsl(200 80% 55%)', // Blue
-    'Upcoming': 'hsl(45 90% 50%)',    // Yellow
-    'Cancelled': 'hsl(0 80% 60%)'     // Red
-  };
+  // Sort by date
+  data.sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
 
   return (
     <div className="h-[300px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={100}
-            paddingAngle={8}
-            dataKey="value"
-            stroke="none"
-          >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={statusColors[entry.name]} />
-            ))}
-          </Pie>
+        <LineChart
+          data={data}
+          margin={{ top: 10, right: 30, left: -20, bottom: 0 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" opacity={0.5} />
+          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: 'var(--muted-foreground)' }} />
+          <YAxis axisLine={false} tickLine={false} tick={{ fill: 'var(--muted-foreground)' }} allowDecimals={false} />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ paddingTop: '20px' }} iconType="circle" />
-        </PieChart>
+          <Line 
+            type="monotone" 
+            dataKey="bookings" 
+            name="Bookings Trend" 
+            stroke="hsl(252 80% 60%)" 
+            strokeWidth={4}
+            dot={{ r: 4, fill: 'hsl(252 80% 60%)', strokeWidth: 2, stroke: 'var(--card)' }}
+            activeDot={{ r: 6, strokeWidth: 0 }}
+          />
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatCard } from '../components/dashboard/StatCard';
-import { StatusPieChart, MonthlyBarChart } from '../components/dashboard/Charts';
+import { TrendLineChart, MonthlyBarChart } from '../components/dashboard/Charts';
 import { bookingService } from '../services/bookingService';
 import type { Booking } from '../types';
 import { Target, CheckCircle2, Clock, IndianRupee, Wallet } from 'lucide-react';
@@ -133,8 +133,8 @@ export default function DashboardPage() {
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         <div className="clay-card bg-card p-6 animate-float-in" style={{ animationDelay: '200ms' }}>
-          <h3 className="text-lg font-semibold mb-4">Bookings by Status</h3>
-          <StatusPieChart bookings={bookings} />
+          <h3 className="text-lg font-semibold mb-4">Bookings Trend</h3>
+          <TrendLineChart bookings={bookings} />
         </div>
         <div className="clay-card bg-card p-6 animate-float-in" style={{ animationDelay: '300ms' }}>
           <div className="flex items-center justify-between mb-4">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { bookingService } from '../services/bookingService';
 import type { Booking } from '../types';
-import { CategoryBarChart, StatusPieChart } from '../components/dashboard/Charts';
+import { CategoryBarChart, TrendLineChart } from '../components/dashboard/Charts';
 import { Skeleton } from '../components/ui/Skeleton';
 
 export default function AnalyticsPage() {
@@ -46,8 +46,8 @@ export default function AnalyticsPage() {
         </div>
         
         <div className="clay-card bg-card p-6 animate-float-in" style={{ animationDelay: '200ms' }}>
-          <h3 className="text-lg font-semibold mb-4">Status Distribution</h3>
-          <StatusPieChart bookings={bookings} />
+          <h3 className="text-lg font-semibold mb-4">Bookings Trend</h3>
+          <TrendLineChart bookings={bookings} />
         </div>
       </div>
     </div>
