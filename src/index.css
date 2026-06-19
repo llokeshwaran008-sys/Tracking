@@ -1,98 +1,351 @@
 @import "tailwindcss";
 @variant dark (&:is(.dark *));
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @theme {
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(222.2 84% 4.9%);
+  /* ---- Light Mode: Soft Purple & Blue Claymorphism ---- */
+  --color-background: hsl(240 30% 96%);
+  --color-foreground: hsl(240 20% 15%);
   --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(222.2 84% 4.9%);
+  --color-card-foreground: hsl(240 20% 15%);
   --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(222.2 84% 4.9%);
-  --color-primary: hsl(221.2 83.2% 53.3%);
-  --color-primary-foreground: hsl(210 40% 98%);
-  --color-secondary: hsl(210 40% 96.1%);
-  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
-  --color-muted: hsl(210 40% 96.1%);
-  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
-  --color-accent: hsl(210 40% 96.1%);
-  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
-  --color-destructive: hsl(0 84.2% 60.2%);
-  --color-destructive-foreground: hsl(210 40% 98%);
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(221.2 83.2% 53.3%);
-  --radius: 0.5rem;
+  --color-popover-foreground: hsl(240 20% 15%);
+  --color-primary: hsl(252 80% 60%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(240 20% 92%);
+  --color-secondary-foreground: hsl(240 20% 30%);
+  --color-muted: hsl(240 15% 90%);
+  --color-muted-foreground: hsl(240 10% 50%);
+  --color-accent: hsl(220 80% 60%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-destructive: hsl(0 75% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(240 20% 88%);
+  --color-input: hsl(240 20% 88%);
+  --color-ring: hsl(252 80% 60%);
+  --radius: 1rem;
+
+  /* Clay color palette */
+  --color-clay-purple: hsl(252 80% 95%);
+  --color-clay-blue: hsl(220 80% 95%);
+  --color-clay-teal: hsl(175 60% 92%);
+  --color-clay-pink: hsl(320 70% 94%);
+  --color-clay-green: hsl(145 60% 92%);
+  --color-clay-yellow: hsl(45 80% 93%);
+  --color-clay-red: hsl(0 70% 93%);
 }
 
-/* CSS custom properties for use with hsl(var(...)) in inline styles & recharts */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  --background: 240 30% 96%;
+  --foreground: 240 20% 15%;
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 240 20% 15%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  --popover-foreground: 240 20% 15%;
+  --primary: 252 80% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 20% 92%;
+  --secondary-foreground: 240 20% 30%;
+  --muted: 240 15% 90%;
+  --muted-foreground: 240 10% 50%;
+  --accent: 220 80% 60%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 75% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 20% 88%;
+  --input: 240 20% 88%;
+  --ring: 252 80% 60%;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 48%;
+  --background: 240 20% 10%;
+  --foreground: 240 15% 92%;
+  --card: 240 18% 14%;
+  --card-foreground: 240 15% 92%;
+  --popover: 240 18% 14%;
+  --popover-foreground: 240 15% 92%;
+  --primary: 252 80% 68%;
+  --primary-foreground: 240 20% 10%;
+  --secondary: 240 18% 20%;
+  --secondary-foreground: 240 15% 80%;
+  --muted: 240 18% 18%;
+  --muted-foreground: 240 12% 55%;
+  --accent: 220 80% 65%;
+  --accent-foreground: 240 20% 10%;
+  --destructive: 0 65% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 18% 22%;
+  --input: 240 18% 22%;
+  --ring: 252 80% 68%;
 
-  --color-background: hsl(222.2 84% 4.9%);
-  --color-foreground: hsl(210 40% 98%);
-  --color-card: hsl(222.2 84% 4.9%);
-  --color-card-foreground: hsl(210 40% 98%);
-  --color-primary: hsl(217.2 91.2% 59.8%);
-  --color-primary-foreground: hsl(222.2 47.4% 11.2%);
-  --color-secondary: hsl(217.2 32.6% 17.5%);
-  --color-secondary-foreground: hsl(210 40% 98%);
-  --color-muted: hsl(217.2 32.6% 17.5%);
-  --color-muted-foreground: hsl(215 20.2% 65.1%);
-  --color-accent: hsl(217.2 32.6% 17.5%);
-  --color-accent-foreground: hsl(210 40% 98%);
-  --color-destructive: hsl(0 62.8% 30.6%);
-  --color-destructive-foreground: hsl(210 40% 98%);
-  --color-border: hsl(217.2 32.6% 17.5%);
-  --color-input: hsl(217.2 32.6% 17.5%);
-  --color-ring: hsl(224.3 76.3% 48%);
+  --color-background: hsl(240 20% 10%);
+  --color-foreground: hsl(240 15% 92%);
+  --color-card: hsl(240 18% 14%);
+  --color-card-foreground: hsl(240 15% 92%);
+  --color-primary: hsl(252 80% 68%);
+  --color-primary-foreground: hsl(240 20% 10%);
+  --color-secondary: hsl(240 18% 20%);
+  --color-secondary-foreground: hsl(240 15% 80%);
+  --color-muted: hsl(240 18% 18%);
+  --color-muted-foreground: hsl(240 12% 55%);
+  --color-accent: hsl(220 80% 65%);
+  --color-accent-foreground: hsl(240 20% 10%);
+  --color-destructive: hsl(0 65% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(240 18% 22%);
+  --color-input: hsl(240 18% 22%);
+  --color-ring: hsl(252 80% 68%);
+
+  --color-clay-purple: hsl(252 40% 22%);
+  --color-clay-blue: hsl(220 40% 22%);
+  --color-clay-teal: hsl(175 35% 20%);
+  --color-clay-pink: hsl(320 35% 22%);
+  --color-clay-green: hsl(145 35% 20%);
+  --color-clay-yellow: hsl(45 40% 20%);
+  --color-clay-red: hsl(0 35% 20%);
 }
 
+/* ===================== GLOBAL ===================== */
 * {
   border-color: var(--color-border);
+  box-sizing: border-box;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: 'Inter', sans-serif;
+  /* Soft mesh gradient background */
+  background-image:
+    radial-gradient(at 20% 20%, hsla(252, 80%, 85%, 0.25) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, hsla(220, 80%, 85%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 60% 80%, hsla(175, 60%, 85%, 0.15) 0px, transparent 50%);
+}
+
+.dark body,
+.dark {
+  background-image:
+    radial-gradient(at 20% 20%, hsla(252, 60%, 20%, 0.4) 0px, transparent 50%),
+    radial-gradient(at 80% 10%, hsla(220, 60%, 20%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 60% 80%, hsla(175, 40%, 18%, 0.25) 0px, transparent 50%);
+}
+
+/* ===================== CLAYMORPHISM UTILITIES ===================== */
+
+/* Main clay card */
+.clay-card {
+  background: var(--color-card);
+  border-radius: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 8px 24px rgba(109, 77, 255, 0.12),
+    0 4px 8px rgba(109, 77, 255, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(109, 77, 255, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clay-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow:
+    0 16px 40px rgba(109, 77, 255, 0.18),
+    0 8px 16px rgba(109, 77, 255, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(109, 77, 255, 0.06);
+}
+
+.dark .clay-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark .clay-card:hover {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.5),
+    0 8px 16px rgba(0, 0, 0, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.07),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Kanban draggable card */
+.clay-item {
+  background: var(--color-card);
+  border-radius: 1.2rem;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 6px 18px rgba(109, 77, 255, 0.1),
+    0 2px 6px rgba(109, 77, 255, 0.07),
+    inset 0 2px 3px rgba(255, 255, 255, 0.8);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: grab;
+}
+
+.clay-item:active {
+  cursor: grabbing;
+  transform: rotate(2deg) scale(1.03);
+  box-shadow:
+    0 20px 50px rgba(109, 77, 255, 0.25),
+    0 8px 20px rgba(109, 77, 255, 0.18),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
+}
+
+.clay-item:hover:not(:active) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 28px rgba(109, 77, 255, 0.15),
+    0 4px 10px rgba(109, 77, 255, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9);
+}
+
+.dark .clay-item {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    inset 0 2px 3px rgba(255, 255, 255, 0.04);
+}
+
+/* Clay button */
+.clay-btn {
+  border-radius: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 12px rgba(109, 77, 255, 0.3),
+    0 2px 4px rgba(109, 77, 255, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.clay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 20px rgba(109, 77, 255, 0.35),
+    0 4px 8px rgba(109, 77, 255, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.clay-btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Clay input */
+.clay-input {
+  border-radius: 0.9rem;
+  border: 2px solid rgba(109, 77, 255, 0.15);
+  box-shadow:
+    inset 0 3px 8px rgba(109, 77, 255, 0.07),
+    inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clay-input:focus {
+  border-color: hsl(var(--primary));
+  box-shadow:
+    0 0 0 3px hsla(252, 80%, 60%, 0.15),
+    inset 0 3px 8px rgba(109, 77, 255, 0.07);
+  outline: none;
+}
+
+/* Clay sidebar */
+.clay-sidebar {
+  background: var(--color-card);
+  box-shadow:
+    4px 0 24px rgba(109, 77, 255, 0.1),
+    2px 0 8px rgba(109, 77, 255, 0.06),
+    inset -2px 0 4px rgba(255, 255, 255, 0.6);
+}
+
+.dark .clay-sidebar {
+  box-shadow:
+    4px 0 24px rgba(0, 0, 0, 0.35),
+    2px 0 8px rgba(0, 0, 0, 0.25),
+    inset -2px 0 4px rgba(255, 255, 255, 0.03);
+}
+
+/* Clay header */
+.clay-header {
+  background: var(--color-card);
+  box-shadow:
+    0 4px 20px rgba(109, 77, 255, 0.08),
+    0 2px 6px rgba(109, 77, 255, 0.05),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.dark .clay-header {
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.03);
+}
+
+/* Clay nav item active */
+.clay-nav-active {
+  background: hsl(var(--primary) / 0.12);
+  box-shadow:
+    0 4px 12px rgba(109, 77, 255, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  border-radius: 0.9rem;
+}
+
+/* Kanban column */
+.clay-column {
+  border-radius: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 6px 20px rgba(109, 77, 255, 0.07),
+    inset 0 2px 4px rgba(255, 255, 255, 0.7);
+}
+
+.dark .clay-column {
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.03);
+}
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-float-in {
+  animation: float-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+@keyframes pulse-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-fast {
+  animation: pulse-fast 1.5s ease-in-out infinite;
+}
+
+/* Gradient Text */
+.text-gradient-clay {
+  background: linear-gradient(135deg, hsl(252 80% 55%), hsl(220 80% 55%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

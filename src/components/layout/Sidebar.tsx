@@ -22,7 +22,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const NavContent = () => (
     <>
       <div className="h-16 flex items-center justify-between px-6 border-b border-border">
-        <h1 className="text-xl font-bold text-primary flex items-center gap-2">
+        <h1 className="text-xl font-bold flex items-center gap-2" style={{background: 'linear-gradient(135deg, hsl(252 80% 60%), hsl(220 80% 60%))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>
           <LayoutDashboard className="w-6 h-6" />
           Trackify
         </h1>
@@ -46,8 +46,8 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
               cn(
                 "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors font-medium text-sm",
                 isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  ? "clay-nav-active text-primary font-semibold"
+                  : "text-muted-foreground hover:bg-secondary/70 hover:text-foreground rounded-[0.9rem]"
               )
             }
           >
@@ -62,7 +62,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   return (
     <>
       {/* Desktop sidebar — always visible */}
-      <aside className="w-64 bg-card border-r border-border h-screen flex-col hidden md:flex">
+      <aside className="w-64 clay-sidebar border-r border-border h-screen flex-col hidden md:flex">
         <NavContent />
       </aside>
 
@@ -77,7 +77,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
       {/* Drawer */}
       <aside
         className={cn(
-          "fixed top-0 left-0 h-full w-64 bg-card border-r border-border flex flex-col z-50 transition-transform duration-300 md:hidden",
+          "fixed top-0 left-0 h-full w-64 clay-sidebar border-r border-border flex flex-col z-50 transition-transform duration-300 md:hidden",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >

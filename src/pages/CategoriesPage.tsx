@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, X, Tag } from 'lucide-react';
 import { categoryService } from '../services/categoryService';
+import { Skeleton } from '../components/ui/Skeleton';
+import { getCategoryColors } from '../lib/categoryColors';
+import { cn } from '../lib/utils';
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<string[]>([]);
@@ -43,56 +46,77 @@ export default function CategoriesPage() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="space-y-6 max-w-3xl">
+        <div>
+          <Skeleton className="h-10 w-64 mb-2" />
+          <Skeleton className="h-5 w-80" />
+        </div>
+        <Skeleton className="h-[400px] w-full" />
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-6 max-w-3xl">
+    <div className="space-y-6 max-w-3xl animate-float-in">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Categories Manager</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-gradient-clay">Categories Manager</h2>
         <p className="text-muted-foreground mt-1">Manage the types of functions and events you book.</p>
       </div>
 
-      <div className="bg-card p-6 rounded-xl border border-border shadow-sm">
+      <div className="clay-card bg-card p-6 border border-border/50">
         <form onSubmit={handleAdd} className="flex gap-4 mb-8">
           <input
             type="text"
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
             placeholder="e.g. Anniversary Party"
-            className="flex-1 px-4 py-2 bg-secondary border-none rounded-md focus:ring-2 focus:ring-primary"
+            className="clay-input flex-1 px-4 py-2 bg-secondary/60 text-foreground"
           />
           <button
             type="submit"
             disabled={!newCategory.trim()}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 flex items-center gap-2 font-medium disabled:opacity-50"
+            className="clay-btn px-5 py-2 text-white rounded-xl font-bold disabled:opacity-50 flex items-center gap-2 transition-all"
+            style={{ background: 'linear-gradient(135deg, hsl(252 80% 60%), hsl(220 80% 62%))' }}
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-5 h-5" />
             Add Category
           </button>
         </form>
 
         <div className="space-y-3">
-          <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Existing Categories</h3>
-          {loading ? (
-            <p className="text-muted-foreground text-sm">Loading categories...</p>
-          ) : categories.length === 0 ? (
-            <p className="text-muted-foreground text-sm">No categories found.</p>
+          <h3 className="font-bold text-sm text-muted-foreground uppercase tracking-wider mb-4">Existing Categories</h3>
+          {categories.length === 0 ? (
+            <div className="text-center py-8 text-muted-foreground bg-secondary/30 rounded-2xl border-2 border-dashed border-border/60">
+              <span className="text-4xl opacity-50 block mb-2">🏷️</span>
+              <p>No categories found.</p>
+            </div>
           ) : (
-            categories.map(category => (
-              <div key={category} className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg border border-border/50 group hover:bg-secondary transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-md text-primary">
-                    <Tag className="w-4 h-4" />
-                  </div>
-                  <span className="font-medium">{category}</span>
-                </div>
-                <button
-                  onClick={() => handleRemove(category)}
-                  className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md opacity-0 group-hover:opacity-100 transition-all"
-                  title="Remove category"
+            categories.map((category, index) => {
+              const catColor = getCategoryColors(category);
+              return (
+                <div 
+                  key={category} 
+                  className="clay-item flex items-center justify-between p-4 bg-card group animate-float-in"
+                  style={{ animationDelay: `${index * 50}ms`, cursor: 'default' }}
                 >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            ))
+                  <div className="flex items-center gap-4">
+                    <div className={cn("p-2.5 rounded-xl border", catColor.bg, catColor.text)}>
+                      <Tag className="w-5 h-5" />
+                    </div>
+                    <span className="font-bold text-lg">{category}</span>
+                  </div>
+                  <button
+                    onClick={() => handleRemove(category)}
+                    className="p-2.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-xl transition-colors"
+                    title="Remove category"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              );
+            })
           )}
         </div>
       </div>
