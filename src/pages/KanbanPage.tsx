@@ -82,7 +82,7 @@ export default function KanbanPage() {
                 </h3>
                 <span 
                   className="px-2.5 py-1 rounded-full text-xs font-bold text-white"
-                  style={{ background: `linear-gradient(135deg, var(--tw-gradient-from, #a78bfa), var(--tw-gradient-to, #60a5fa))`, background: `linear-gradient(135deg, hsl(252 80% 60%), hsl(220 80% 62%))` }}
+                  style={{ background: `linear-gradient(135deg, hsl(252 80% 60%), hsl(220 80% 62%))` }}
                 >
                   {columnBookings.length}
                 </span>
